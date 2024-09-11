@@ -9,8 +9,6 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'user'
-    # Here we define columns for the table person
-    # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     last_name = Column(String(250), nullable=False)
@@ -21,8 +19,6 @@ class User(Base):
 
 class Planet(Base):
     __tablename__ = 'planet'
-    # Here we define columns for the table address.
-    # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     orbital_period = Column(Integer, nullable=False)
@@ -34,10 +30,18 @@ class Planet(Base):
 class Character(Base):
     __tablename__ = 'character'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)
+    name = Column(String(250), nullable=False)4
     height = Column(Float, nullable=False)
     eye_color = Column(String(250))
-    mass = Column(Integer)
+    mass = Column(Integer, nullable=False)
+
+
+class Favorites(Base):
+    __tablename__ = 'favorites'
+    id = Column(Integer, primary_key=True)
+    name_planet = Column(String(250), ForeignKey(Planet.name), nullable=True)
+    id_user = Column(Integer, ForeignKey(User.id), nullable=False)
+    name_character = Column(String(250), ForeignKey(Character.name), nullable=True)
 
     def to_dict(self):
         return {}
