@@ -30,7 +30,7 @@ class Planet(Base):
 class Character(Base):
     __tablename__ = 'character'
     id = Column(Integer, primary_key=True)
-    name = Column(String(250), nullable=False)4
+    name = Column(String(250), nullable=False)
     height = Column(Float, nullable=False)
     eye_color = Column(String(250))
     mass = Column(Integer, nullable=False)
@@ -39,9 +39,9 @@ class Character(Base):
 class Favorites(Base):
     __tablename__ = 'favorites'
     id = Column(Integer, primary_key=True)
-    name_planet = Column(String(250), ForeignKey(Planet.name), nullable=True)
+    id_planet = Column(Integer, ForeignKey(Planet.id), nullable=True)
     id_user = Column(Integer, ForeignKey(User.id), nullable=False)
-    name_character = Column(String(250), ForeignKey(Character.name), nullable=True)
+    id_character = Column(String(250), ForeignKey(Character.id), nullable=True)
 
     def to_dict(self):
         return {}
